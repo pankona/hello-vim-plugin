@@ -1,0 +1,226 @@
+
+Reading viminfo file "/home/codespace/.viminfo" info oldfiles
+[hello-vim-plugin] starting with command: ['go', 'run', 'cmd/hello-vim-plugin/main.go']
+[hello-vim-plugin] job status: run
+[hello-vim-plugin] started with job: process 33914 run
+[hello-vim-plugin] received raw: '{"type":"status","content":"hello-vim-plugin started"}'
+[hello-vim-plugin] parsed json: {'type': 'status', 'content': 'hello-vim-plugin started'}
+[hello-vim-plugin] status: hello-vim-plugin started
+"hello-vim-plugin://chat"  --No lines in buffer--
+[hello-vim-plugin] Added message: role=user, content=こんにちは、あなたは誰ですか？
+[hello-vim-plugin] Added message: role=assistant, content=
+[hello-vim-plugin] sent message: {"type":"chat","content":{"messages":[{"role":"user","content":"こんにちは、あなたは誰ですか？"}],"system_prompt":"You are a helpful AI assistant."}}
+[hello-vim-plugin] received raw: '{"type":"response","content":"こんにちは"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'こんにちは'}
+[hello-vim-plugin] Updated message: こんにちは
+[hello-vim-plugin] received raw: '{"type":"response","content":"！"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '！'}
+[hello-vim-plugin] Updated message: こんにちは！
+[hello-vim-plugin] received raw: '{"type":"response","content":"私"}'
+
+[hello-vim-plugin] received raw: '{"type":"response","content":"は"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'は'}
+[hello-vim-plugin] Updated message: こんにちは！は
+[hello-vim-plugin] received raw: '{"type":"response","content":"Open"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'Open'}
+[hello-vim-plugin] Updated message: こんにちは！はOpen
+[hello-vim-plugin] received raw: '{"type":"response","content":"AI"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'AI'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAI
+[hello-vim-plugin] received raw: '{"type":"response","content":"が"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'が'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが
+[hello-vim-plugin] received raw: '{"type":"response","content":"開"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '開'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開
+[hello-vim-plugin] received raw: '{"type":"response","content":"発"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '発'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発
+[hello-vim-plugin] received raw: '{"type":"response","content":"した"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'した'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発した
+[hello-vim-plugin] received raw: '{"type":"response","content":"AI"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'AI'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAI
+[hello-vim-plugin] received raw: '{"type":"response","content":"ア"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'ア'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIア
+[hello-vim-plugin] received raw: '{"type":"response","content":"シ"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'シ'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシ
+[hello-vim-plugin] received raw: '{"type":"response","content":"ス"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'ス'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシス
+[hello-vim-plugin] received raw: '{"type":"response","content":"タ"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'タ'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタ
+[hello-vim-plugin] received raw: '{"type":"response","content":"ント"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'ント'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタント
+[hello-vim-plugin] received raw: '{"type":"response","content":"です"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'です'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです
+[hello-vim-plugin] received raw: '{"type":"response","content":"。"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '。'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。
+[hello-vim-plugin] received raw: '{"type":"response","content":"質"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '質'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質
+[hello-vim-plugin] received raw: '{"type":"response","content":"問"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '問'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問
+[hello-vim-plugin] received raw: '{"type":"response","content":"に"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'に'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に
+[hello-vim-plugin] received raw: '{"type":"response","content":"答"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '答'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答
+[hello-vim-plugin] received raw: '{"type":"response","content":"え"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'え'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答え
+[hello-vim-plugin] received raw: '{"type":"response","content":"た"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'た'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えた
+[hello-vim-plugin] received raw: '{"type":"response","content":"り"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'り'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり
+[hello-vim-plugin] received raw: '{"type":"response","content":"、"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '、'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、
+[hello-vim-plugin] received raw: '{"type":"response","content":"情"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '情'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情
+[hello-vim-plugin] received raw: '{"type":"response","content":"報"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '報'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報
+[hello-vim-plugin] received raw: '{"type":"response","content":"を"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'を'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を
+[hello-vim-plugin] received raw: '{"type":"response","content":"提"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '提'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提
+[hello-vim-plugin] received raw: '{"type":"response","content":"供"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '供'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供
+[hello-vim-plugin] received raw: '{"type":"response","content":"した"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'した'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供した
+[hello-vim-plugin] received raw: '{"type":"response","content":"り"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'り'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり
+[hello-vim-plugin] received raw: '{"type":"response","content":"、"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '、'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、
+[hello-vim-plugin] received raw: '{"type":"response","content":"様"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '様'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様
+[hello-vim-plugin] received raw: '{"type":"response","content":"々"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '々'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々
+[hello-vim-plugin] received raw: '{"type":"response","content":"な"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'な'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々な
+[hello-vim-plugin] received raw: '{"type":"response","content":"ト"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'ト'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なト
+[hello-vim-plugin] received raw: '{"type":"response","content":"ピ"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'ピ'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピ
+[hello-vim-plugin] received raw: '{"type":"response","content":"ック"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'ック'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピック
+[hello-vim-plugin] received raw: '{"type":"response","content":"に"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'に'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックに
+[hello-vim-plugin] received raw: '{"type":"response","content":"つ"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'つ'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックにつ
+[hello-vim-plugin] received raw: '{"type":"response","content":"い"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'い'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについ
+[hello-vim-plugin] received raw: '{"type":"response","content":"て"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'て'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて
+[hello-vim-plugin] received raw: '{"type":"response","content":"会"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '会'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会
+[hello-vim-plugin] received raw: '{"type":"response","content":"話"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '話'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話
+[hello-vim-plugin] received raw: '{"type":"response","content":"を"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'を'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話を
+[hello-vim-plugin] received raw: '{"type":"response","content":"した"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'した'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をした
+[hello-vim-plugin] received raw: '{"type":"response","content":"り"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'り'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたり
+[hello-vim-plugin] received raw: '{"type":"response","content":"する"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'する'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりする
+[hello-vim-plugin] received raw: '{"type":"response","content":"こ"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'こ'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりするこ
+[hello-vim-plugin] received raw: '{"type":"response","content":"と"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'と'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすること
+[hello-vim-plugin] received raw: '{"type":"response","content":"が"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'が'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることが
+[hello-vim-plugin] received raw: '{"type":"response","content":"で"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'で'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることがで
+[hello-vim-plugin] received raw: '{"type":"response","content":"き"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'き'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができ
+[hello-vim-plugin] received raw: '{"type":"response","content":"ます"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'ます'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます
+[hello-vim-plugin] received raw: '{"type":"response","content":"。"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '。'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。
+[hello-vim-plugin] received raw: '{"type":"response","content":"ど"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'ど'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。ど
+[hello-vim-plugin] received raw: '{"type":"response","content":"う"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'う'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。どう
+[hello-vim-plugin] received raw: '{"type":"response","content":"ぞ"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'ぞ'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。どうぞ
+[hello-vim-plugin] received raw: '{"type":"response","content":"、"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '、'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。どうぞ、
+[hello-vim-plugin] received raw: '{"type":"response","content":"お"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'お'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。どうぞ、お
+[hello-vim-plugin] received raw: '{"type":"response","content":"気"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '気'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。どうぞ、お気
+[hello-vim-plugin] received raw: '{"type":"response","content":"軽"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '軽'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。どうぞ、お気軽
+[hello-vim-plugin] received raw: '{"type":"response","content":"に"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'に'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。どうぞ、お気軽に
+[hello-vim-plugin] received raw: '{"type":"response","content":"質"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '質'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。どうぞ、お気軽に質
+[hello-vim-plugin] received raw: '{"type":"response","content":"問"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '問'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。どうぞ、お気軽に質問
+[hello-vim-plugin] received raw: '{"type":"response","content":"して"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'して'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。どうぞ、お気軽に質問して
+[hello-vim-plugin] received raw: '{"type":"response","content":"ください"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': 'ください'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。どうぞ、お気軽に質問してください
+[hello-vim-plugin] received raw: '{"type":"response","content":"！"}'
+[hello-vim-plugin] parsed json: {'type': 'response', 'content': '！'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。どうぞ、お気軽に質問してください！[hello-vim-plugin] parsed json: {'type': 'response', 'content': '私'}
+[hello-vim-plugin] Updated message: こんにちは！はOpenAIが開発したAIアシスタントです。質問に答えたり、情報を提供したり、様々なトピックについて会話をしたりすることができます。どうぞ、お気軽に質問してください！私
+[hello-vim-plugin] stopped job: process 33914 run
+
+[hello-vim-plugin] process exited with code: -1[hello-vim-plugin] stderr: 'Received shutdown signal'
+Writing viminfo file "/home/codespace/.viminfo"
