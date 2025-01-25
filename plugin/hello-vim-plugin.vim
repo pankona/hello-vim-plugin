@@ -16,7 +16,6 @@ if v:version < 800
 endif
 
 " グローバル変数のデフォルト値設定
-let g:hello_vim_plugin_debug = 1  " デバッグモードを有効化
 let g:hello_vim_plugin_job = v:null
 let g:hello_vim_plugin_buffer = -1
 let g:hello_vim_plugin_current_message = ''
@@ -163,7 +162,7 @@ endfunction
 
 " デバッグログ出力
 function! s:debug_print(msg) abort
-    if g:hello_vim_plugin_debug
+    if hello_vim_plugin#config#is_debug()
         echomsg '[hello-vim-plugin] ' . a:msg
         call writefile(['[' . strftime('%H:%M:%S') . '] ' . a:msg], 'vim_debug.log', 'a')
     endif
@@ -272,144 +271,16 @@ function! s:stop() abort
     call s:debug_print('stopped job: ' . string(g:hello_vim_plugin_job))
 endfunction
 
-" チャットメッセージの送信
-function! s:send_chat_message(content) abort
-    if g:hello_vim_plugin_job == v:null
-        echomsg 'hello-vim-plugin is not running'
-        return
-    endif
-
-    " 新しいメッセージを開始
-    let g:hello_vim_plugin_current_message = ''
-    
-    call s:display_message('user', a:content)
-    call s:display_message('assistant', '')  " 応答用の空行を追加
-
-    let request = {}
-    let request.system_prompt = 'You are a helpful AI assistant.'
-    let request.messages = [{'role': 'user', 'content': a:content}]
-
-    let msg = {}
-    let msg.type = 'chat'
-    let msg.content = request
-
-    let channel = job_getchannel(g:hello_vim_plugin_job)
-    call ch_sendraw(channel, json_encode(msg) . "\n")
-    call s:debug_print('sent message: ' . json_encode(msg))
-endfunction
-
-" ファイル読み込み
-function! s:read_file(path) abort
-    if g:hello_vim_plugin_job == v:null
-        echomsg 'hello-vim-plugin is not running'
-        return
-    endif
-
-    let operation = {}
-    let operation.operation = 'read'
-    let operation.path = a:path
-
-    let msg = {}
-    let msg.type = 'file'
-    let msg.content = operation
-
-    let channel = job_getchannel(g:hello_vim_plugin_job)
-    call ch_sendraw(channel, json_encode(msg) . "\n")
-    call s:debug_print('sent file operation: ' . json_encode(msg))
-endfunction
-
-" ファイル書き込み
-function! s:write_file(args) abort
-    if g:hello_vim_plugin_job == v:null
-        echomsg 'hello-vim-plugin is not running'
-        return
-    endif
-
-    " 引数を解析
-    let parts = split(a:args, '\s\+')
-    if len(parts) < 2
-        echohl ErrorMsg
-        echomsg 'Usage: HelloVimWrite <path> <content>'
-        echohl None
-        return
-    endif
-
-    let path = parts[0]
-    let content = join(parts[1:], ' ')
-
-    let operation = {}
-    let operation.operation = 'write'
-    let operation.path = path
-    let operation.content = content
-
-    let msg = {}
-    let msg.type = 'file'
-    let msg.content = operation
-
-    let channel = job_getchannel(g:hello_vim_plugin_job)
-    call ch_sendraw(channel, json_encode(msg) . "\n")
-    call s:debug_print('sent file operation: ' . json_encode(msg))
-endfunction
-
-" ファイル検索
-function! s:search_files(path, pattern) abort
-    if g:hello_vim_plugin_job == v:null
-        echomsg 'hello-vim-plugin is not running'
-        return
-    endif
-
-    let operation = {}
-    let operation.operation = 'search'
-    let operation.path = a:path
-    let operation.pattern = a:pattern
-
-    let msg = {}
-    let msg.type = 'file'
-    let msg.content = operation
-
-    let channel = job_getchannel(g:hello_vim_plugin_job)
-    call ch_sendraw(channel, json_encode(msg) . "\n")
-    call s:debug_print('sent file operation: ' . json_encode(msg))
-endfunction
-
-" コマンド実行
-function! s:execute_command(args) abort
-    if g:hello_vim_plugin_job == v:null
-        echomsg 'hello-vim-plugin is not running'
-        return
-    endif
-
-    " 引数を解析
-    let parts = split(a:args, '\s\+')
-    if empty(parts)
-        echohl ErrorMsg
-        echomsg 'Usage: HelloVimCommand <command> [args...]'
-        echohl None
-        return
-    endif
-
-    let operation = {}
-    let operation.command = parts[0]
-    let operation.args = parts[1:]
-    let operation.dir = getcwd()
-
-    let msg = {}
-    let msg.type = 'command'
-    let msg.content = operation
-
-    let channel = job_getchannel(g:hello_vim_plugin_job)
-    call ch_sendraw(channel, json_encode(msg) . "\n")
-    call s:debug_print('sent command operation: ' . json_encode(msg))
-endfunction
-
 " コマンドの定義
 command! -nargs=0 HelloVimPluginStart call s:start()
 command! -nargs=0 HelloVimPluginStop call s:stop()
-command! -nargs=+ HelloVimChat call s:send_chat_message(<q-args>)
-command! -nargs=1 -complete=file HelloVimRead call s:read_file(<q-args>)
-command! -nargs=+ -complete=file HelloVimWrite call s:write_file(<q-args>)
-command! -nargs=+ HelloVimSearch call s:search_files(<f-args>)
-command! -nargs=+ -complete=shellcmd HelloVimCommand call s:execute_command(<q-args>)
+command! -nargs=+ HelloVimChat call hello_vim_plugin#tools#send_chat_message(<q-args>)
+command! -nargs=1 -complete=file HelloVimRead call hello_vim_plugin#tools#read_file(<q-args>)
+command! -nargs=+ HelloVimWrite call hello_vim_plugin#tools#write_file(<q-args>)
+command! -nargs=+ HelloVimSearch call hello_vim_plugin#tools#search_files(<f-args>)
+command! -nargs=+ -complete=shellcmd HelloVimCommand call hello_vim_plugin#tools#execute_command(<f-args>)
+command! -nargs=1 -complete=customlist,hello_vim_plugin#tools#complete_mode HelloVimMode call hello_vim_plugin#tools#switch_mode(<q-args>)
+command! -nargs=0 HelloVimHelp call hello_vim_plugin#tools#show_help()
 
 " キーマッピング
 if !hasmapto('<Plug>(hello-vim-plugin-start)')
