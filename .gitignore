@@ -1,1 +1,22 @@
-Roo-Code-main
+# Vim
+*.swp
+*.swo
+*.swn
+
+# Debug logs
+*.log
+debug.log
+test.log
+vim_debug.log
+go_output.log
+
+# Go
+/vendor/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
