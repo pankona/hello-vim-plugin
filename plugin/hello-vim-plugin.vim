@@ -69,6 +69,35 @@ function! s:display_message(role, content) abort
     endif
 endfunction
 
+" ファイル操作結果の表示
+function! s:display_file_result(result) abort
+    if !a:result.success
+        echohl ErrorMsg
+        echomsg 'File operation failed: ' . a:result.error
+        echohl None
+        return
+    endif
+
+    if has_key(a:result, 'content')
+        " ファイル内容の表示
+        new
+        setlocal buftype=nofile
+        setlocal bufhidden=hide
+        setlocal noswapfile
+        call append(0, split(a:result.content, "\n"))
+        normal! gg
+    elseif has_key(a:result, 'matches')
+        " 検索結果の表示
+        new
+        setlocal buftype=nofile
+        setlocal bufhidden=hide
+        setlocal noswapfile
+        call append(0, ['Search results:', ''])
+        call append(2, a:result.matches)
+        normal! gg
+    endif
+endfunction
+
 " デバッグログ出力
 function! s:debug_print(msg) abort
     if g:hello_vim_plugin_debug
@@ -85,7 +114,7 @@ function! s:on_stdout(channel, msg) abort
         call s:debug_print('parsed json: ' . string(data))
         
         if data.type == 'response'
-            " レスポンスを現在のメッセージに追加
+            " チャットレスポンスの処理
             let g:hello_vim_plugin_current_message .= data.content
             
             " バッファの最後の行を更新
@@ -101,6 +130,9 @@ function! s:on_stdout(channel, msg) abort
                 setlocal nomodifiable
                 call s:debug_print('Updated message: ' . g:hello_vim_plugin_current_message)
             endif
+        elseif data.type == 'file_response'
+            " ファイル操作レスポンスの処理
+            call s:display_file_result(data.content)
         elseif data.type == 'status'
             call s:debug_print('status: ' . data.content)
         endif
@@ -200,10 +232,87 @@ function! s:send_chat_message(content) abort
     call s:debug_print('sent message: ' . json_encode(msg))
 endfunction
 
+" ファイル読み込み
+function! s:read_file(path) abort
+    if g:hello_vim_plugin_job == v:null
+        echomsg 'hello-vim-plugin is not running'
+        return
+    endif
+
+    let operation = {}
+    let operation.operation = 'read'
+    let operation.path = a:path
+
+    let msg = {}
+    let msg.type = 'file'
+    let msg.content = operation
+
+    let channel = job_getchannel(g:hello_vim_plugin_job)
+    call ch_sendraw(channel, json_encode(msg) . "\n")
+    call s:debug_print('sent file operation: ' . json_encode(msg))
+endfunction
+
+" ファイル書き込み
+function! s:write_file(args) abort
+    if g:hello_vim_plugin_job == v:null
+        echomsg 'hello-vim-plugin is not running'
+        return
+    endif
+
+    " 引数を解析
+    let parts = split(a:args, '\s\+')
+    if len(parts) < 2
+        echohl ErrorMsg
+        echomsg 'Usage: HelloVimWrite <path> <content>'
+        echohl None
+        return
+    endif
+
+    let path = parts[0]
+    let content = join(parts[1:], ' ')
+
+    let operation = {}
+    let operation.operation = 'write'
+    let operation.path = path
+    let operation.content = content
+
+    let msg = {}
+    let msg.type = 'file'
+    let msg.content = operation
+
+    let channel = job_getchannel(g:hello_vim_plugin_job)
+    call ch_sendraw(channel, json_encode(msg) . "\n")
+    call s:debug_print('sent file operation: ' . json_encode(msg))
+endfunction
+
+" ファイル検索
+function! s:search_files(path, pattern) abort
+    if g:hello_vim_plugin_job == v:null
+        echomsg 'hello-vim-plugin is not running'
+        return
+    endif
+
+    let operation = {}
+    let operation.operation = 'search'
+    let operation.path = a:path
+    let operation.pattern = a:pattern
+
+    let msg = {}
+    let msg.type = 'file'
+    let msg.content = operation
+
+    let channel = job_getchannel(g:hello_vim_plugin_job)
+    call ch_sendraw(channel, json_encode(msg) . "\n")
+    call s:debug_print('sent file operation: ' . json_encode(msg))
+endfunction
+
 " コマンドの定義
 command! -nargs=0 HelloVimPluginStart call s:start()
 command! -nargs=0 HelloVimPluginStop call s:stop()
 command! -nargs=+ HelloVimChat call s:send_chat_message(<q-args>)
+command! -nargs=1 -complete=file HelloVimRead call s:read_file(<q-args>)
+command! -nargs=+ -complete=file HelloVimWrite call s:write_file(<q-args>)
+command! -nargs=+ HelloVimSearch call s:search_files(<f-args>)
 
 " キーマッピング
 if !hasmapto('<Plug>(hello-vim-plugin-start)')
