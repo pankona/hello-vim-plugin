@@ -20,6 +20,7 @@ let g:hello_vim_plugin_debug = 1  " デバッグモードを有効化
 let g:hello_vim_plugin_job = v:null
 let g:hello_vim_plugin_buffer = -1
 let g:hello_vim_plugin_current_message = ''
+let g:hello_vim_plugin_command_buffer = -1
 
 " メッセージバッファの作成
 function! s:create_message_buffer() abort
@@ -34,6 +35,31 @@ function! s:create_message_buffer() abort
     setlocal nobuflisted
     execute 'silent file hello-vim-plugin://chat'
     
+    return buf
+endfunction
+
+" コマンド実行結果バッファの作成
+function! s:create_command_buffer() abort
+    " 既存のバッファがある場合は再利用
+    if g:hello_vim_plugin_command_buffer != -1 && bufexists(g:hello_vim_plugin_command_buffer)
+        execute 'buffer ' . g:hello_vim_plugin_command_buffer
+        setlocal modifiable
+        silent! %delete _
+        return g:hello_vim_plugin_command_buffer
+    endif
+
+    " 新しいバッファを作成
+    execute 'new'
+    let buf = bufnr('%')
+    
+    " バッファの設定
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
+    setlocal nobuflisted
+    execute 'silent file hello-vim-plugin://command-' . buf
+    
+    let g:hello_vim_plugin_command_buffer = buf
     return buf
 endfunction
 
@@ -67,6 +93,43 @@ function! s:display_message(role, content) abort
         
         call s:debug_print('Added message: role=' . a:role . ', content=' . a:content)
     endif
+endfunction
+
+" コマンド実行結果の表示
+function! s:display_command_result(result) abort
+    " バッファの取得または作成
+    let buf = s:create_command_buffer()
+    
+    " バッファに切り替え
+    execute 'buffer ' . buf
+    setlocal modifiable
+    
+    " 結果の表示
+    let lines = []
+    if !a:result.success
+        call add(lines, 'Command failed with exit code: ' . a:result.exit_code)
+        if !empty(a:result.error)
+            call add(lines, 'Error: ' . a:result.error)
+        endif
+        call add(lines, '')
+    endif
+    
+    if !empty(a:result.stdout)
+        call add(lines, '=== Standard Output ===')
+        call extend(lines, split(a:result.stdout, "\n"))
+        call add(lines, '')
+    endif
+    
+    if !empty(a:result.stderr)
+        call add(lines, '=== Standard Error ===')
+        call extend(lines, split(a:result.stderr, "\n"))
+        call add(lines, '')
+    endif
+    
+    " バッファに内容を追加
+    call setline(1, lines)
+    normal! gg
+    setlocal nomodifiable
 endfunction
 
 " ファイル操作結果の表示
@@ -133,6 +196,9 @@ function! s:on_stdout(channel, msg) abort
         elseif data.type == 'file_response'
             " ファイル操作レスポンスの処理
             call s:display_file_result(data.content)
+        elseif data.type == 'command_response'
+            " コマンド実行レスポンスの処理
+            call s:display_command_result(data.content)
         elseif data.type == 'status'
             call s:debug_print('status: ' . data.content)
         endif
@@ -306,6 +372,36 @@ function! s:search_files(path, pattern) abort
     call s:debug_print('sent file operation: ' . json_encode(msg))
 endfunction
 
+" コマンド実行
+function! s:execute_command(args) abort
+    if g:hello_vim_plugin_job == v:null
+        echomsg 'hello-vim-plugin is not running'
+        return
+    endif
+
+    " 引数を解析
+    let parts = split(a:args, '\s\+')
+    if empty(parts)
+        echohl ErrorMsg
+        echomsg 'Usage: HelloVimCommand <command> [args...]'
+        echohl None
+        return
+    endif
+
+    let operation = {}
+    let operation.command = parts[0]
+    let operation.args = parts[1:]
+    let operation.dir = getcwd()
+
+    let msg = {}
+    let msg.type = 'command'
+    let msg.content = operation
+
+    let channel = job_getchannel(g:hello_vim_plugin_job)
+    call ch_sendraw(channel, json_encode(msg) . "\n")
+    call s:debug_print('sent command operation: ' . json_encode(msg))
+endfunction
+
 " コマンドの定義
 command! -nargs=0 HelloVimPluginStart call s:start()
 command! -nargs=0 HelloVimPluginStop call s:stop()
@@ -313,6 +409,7 @@ command! -nargs=+ HelloVimChat call s:send_chat_message(<q-args>)
 command! -nargs=1 -complete=file HelloVimRead call s:read_file(<q-args>)
 command! -nargs=+ -complete=file HelloVimWrite call s:write_file(<q-args>)
 command! -nargs=+ HelloVimSearch call s:search_files(<f-args>)
+command! -nargs=+ -complete=shellcmd HelloVimCommand call s:execute_command(<q-args>)
 
 " キーマッピング
 if !hasmapto('<Plug>(hello-vim-plugin-start)')

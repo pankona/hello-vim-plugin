@@ -2,11 +2,13 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"os"
+	"os/exec"
 	"os/signal"
 	"path/filepath"
 	"strings"
@@ -33,6 +35,22 @@ type FileOperation struct {
 	Path      string `json:"path"`
 	Content   string `json:"content,omitempty"`
 	Pattern   string `json:"pattern,omitempty"`
+}
+
+// CommandOperation はコマンド実行要求を表す構造体
+type CommandOperation struct {
+	Command string   `json:"command"` // 実行するコマンド
+	Args    []string `json:"args"`    // コマンドの引数
+	Dir     string   `json:"dir"`     // 作業ディレクトリ
+}
+
+// CommandResponse はコマンド実行結果を表す構造体
+type CommandResponse struct {
+	Success  bool   `json:"success"`
+	ExitCode int    `json:"exit_code"`
+	Stdout   string `json:"stdout"`
+	Stderr   string `json:"stderr"`
+	Error    string `json:"error,omitempty"`
 }
 
 // FileResponse はファイル操作の結果を表す構造体
@@ -195,6 +213,51 @@ func searchFiles(path string, pattern string) FileResponse {
 	}
 }
 
+// handleCommandOperation はコマンド実行を処理する
+func handleCommandOperation(op CommandOperation) CommandResponse {
+	// コマンドの実行コンテキストを作成
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	// コマンドの作成
+	cmd := exec.CommandContext(ctx, op.Command, op.Args...)
+
+	// 作業ディレクトリの設定
+	if op.Dir != "" {
+		cmd.Dir = op.Dir
+	}
+
+	// 標準出力とエラー出力のバッファを作成
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+
+	// コマンドの実行
+	err := cmd.Run()
+
+	// 実行結果の作成
+	response := CommandResponse{
+		Stdout:   stdout.String(),
+		Stderr:   stderr.String(),
+		ExitCode: cmd.ProcessState.ExitCode(),
+	}
+
+	if err != nil {
+		if exitError, ok := err.(*exec.ExitError); ok {
+			response.Success = false
+			response.ExitCode = exitError.ExitCode()
+			response.Error = fmt.Sprintf("command failed with exit code %d", exitError.ExitCode())
+		} else {
+			response.Success = false
+			response.Error = fmt.Sprintf("failed to execute command: %v", err)
+		}
+	} else {
+		response.Success = true
+	}
+
+	return response
+}
+
 // sendMessage はメッセージをJSON形式で標準出力に送信する
 func sendMessage(msg Message) error {
 	data, err := json.Marshal(msg)
@@ -325,6 +388,29 @@ func main() {
 					Content: response,
 				}); err != nil {
 					fmt.Fprintf(os.Stderr, "Error sending file response: %v\n", err)
+				}
+
+			case "command":
+				var op CommandOperation
+				data, err := json.Marshal(msg.Content)
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "Error marshaling content: %v\n", err)
+					continue
+				}
+
+				if err := json.Unmarshal(data, &op); err != nil {
+					fmt.Fprintf(os.Stderr, "Error parsing command operation: %v\n", err)
+					continue
+				}
+
+				client.log("Processing command operation: %+v", op)
+				response := handleCommandOperation(op)
+
+				if err := sendMessage(Message{
+					Type:    "command_response",
+					Content: response,
+				}); err != nil {
+					fmt.Fprintf(os.Stderr, "Error sending command response: %v\n", err)
 				}
 
 			case "ping":
